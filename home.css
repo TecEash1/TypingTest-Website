@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  #test-area {
+    margin: 0 auto;
+    width: 50%;
+    border: 2px solid #333;
+    padding: 10px;
+  }
+  
+  #test-sentence {
+    font-size: 2em;
+  }
+  
+  #typing-area {
+    width: 100%;
+    height: 100px;
+    font-size: 1.5em;
+    margin-top: 10px;
+  }
+  
+  button {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    margin-top: 10px;
+  }
+  
+  #timer {
+    font-size: 1.5em;
+    margin-top: 10px;
+  }
+  
