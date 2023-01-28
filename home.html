@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Typing Test</title>
-  <link rel="stylesheet" type="text/css" href="home.css">
+    <title>Typing Speed Test</title>
+    <link rel="stylesheet" type="text/css" href="home.css">
 </head>
+
 <body>
-  <h1>Typing Test</h1>
-  <div id="test-area">
-    <p id="test-sentence">[INDEV] No longer needed: in javascript file now</p>
-    <textarea id="typing-area"></textarea>
-  </div>
-  <button id="start-button">Start Test</button>
-  <button id="reset-button">Reset</button>
-  <p id="timer"></p>
-  <script src="home.js"></script>
+    <div id="container">
+        <div id="prompt">Type the following paragraph as quickly and accurately as possible:</div>
+        <div id="text-to-type"></div>
+        <textarea id="typing-area"></textarea>
+        <div id="results">
+            <div>Time: <span id="time"></span></div>
+            <div>Mistakes: <span id="mistakes"></span></div>
+            <div>WPM: <span id="wpm"></span></div>
+            <div>CPM: <span id="cpm"></span></div>
+        </div>
+        <button id="try-again-btn">Try Again</button>
+    </div>
+    <script src="home.js"></script>
 </body>
+
 </html>
+
+

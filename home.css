@@ -1,34 +1,52 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-  }
-  
-  #test-area {
+#container {
+    width: 80%;
     margin: 0 auto;
-    width: 50%;
-    border: 2px solid #333;
-    padding: 10px;
-  }
-  
-  #test-sentence {
-    font-size: 2em;
-  }
-  
-  #typing-area {
+}
+
+#prompt {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#text-to-type {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#typing-area {
     width: 100%;
-    height: 100px;
-    font-size: 1.5em;
-    margin-top: 10px;
-  }
-  
-  button {
-    font-size: 1.5em;
+    height: 200px;
+    padding: 10px;
+    font-size: 24px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+#results {
+    margin-bottom: 20px;
+}
+
+#results div {
+    margin-bottom: 10px;
+}
+
+#time, #mistakes, #wpm, #cpm {
+    font-weight: bold;
+}
+
+#try-again-btn {
     padding: 10px 20px;
-    margin-top: 10px;
-  }
-  
-  #timer {
-    font-size: 1.5em;
-    margin-top: 10px;
-  }
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#try-again-btn:hover {
+    background-color: #3e8e41;
+}
+
   

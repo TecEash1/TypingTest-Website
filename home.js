@@ -1,122 +1,94 @@
-let testArea = document.getElementById("test-area");
-let typingArea = document.getElementById("typing-area");
-let timer = document.getElementById("timer");
-let currentLine = 1;
+const textToType = document.getElementById("text-to-type");
+const typingArea = document.getElementById("typing-area");
+const time = document.getElementById("time");
+const mistakes = document.getElementById("mistakes");
+const wpm = document.getElementById("wpm");
+const cpm = document.getElementById("cpm");
+const tryAgainBtn = document.getElementById("try-again-btn");
+
+// Variables to keep track of the game
 let startTime;
-let words = ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "about", "all" , "also", "and", "as", "at", "be", "because", "but", "by", "can", "come", "could", "day", "do", "even", "find", "first", "for", "from","get" ,"give" ,"go" ,"have" ,"he" ,"her","here" ,"him" ,"his" ,"how" ,"I" ,"if" ,"in" ,"into" ,"it" ,"its" ,"just","know" ,"like","look" ,"make" ,"man" ,"many" ,"me" ,"more" ,"my"  ,"new" ,"no" ,"not" ,"now" ,"of" ,"on","one","only" ,"or" ,"other"  ,"our" ,"out" ,"people" ,"say" ,"see" ,"she" ,"so" ,"some" ,"take","tell","than","that","the" ,"their" ,"them" ,"then","there","these","they","thing" ,"think" ,"this" ,"those" ,"time" ,"to" ,"two" ,"up" ,"use" ,"very" ,"want" ,"way" ,"we","well","what","when"  ,"which" ,"who" ,"will" ,"with","would","year","you","your"];
-let testSentence;
+let totalTime = 60; // max time for typing in seconds
+let intervalId;
+let mistakesCount = 0;
+let charactersTyped = 0;
 
-// Shuffle the words array
-shuffle(words);
-
-// Create the first test sentence element
-testSentence = createTestSentence();
-
-// Append the test sentence element to the test area
-testArea.appendChild(testSentence);
-
-// Function to create a test sentence element
-function createTestSentence() {
-  // Create a new p element
-  let sentence = document.createElement("p");
-
-  // Set the text content of the p element
-  sentence.textContent = words.join(" ");
-
-  return sentence;
+// Function to generate a new paragraph for the user to type
+function generateNewParagraph() {
+    // replace this with your own array of paragraphs or some api call to fetch paragraphs
+    const paragraphs = [
+        "The quick brown fox jumps over the lazy dog.", 
+        "Once upon a time, in a land far far away."
+    ];
+    // Select a random paragraph from the array
+    const paragraph = paragraphs[Math.floor(Math.random() * paragraphs.length)];
+    textToType.innerText = paragraph;
 }
 
-// Function to shuffle an array
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
+// Function to start the game
+function startGame() {
+    // Clear any existing interval
+    clearInterval(intervalId);
+    // Generate a new paragraph
+    generateNewParagraph();
+    // Clear the typing area
+    typingArea.value = "";
+    // Set the focus to the typing area
+    typingArea.focus();
+    // Reset the mistakes count
+    mistakesCount = 0;
+    mistakes.innerText = mistakesCount;
+    // Reset the characters typed count
+    charactersTyped = 0;
+    // Get the current time
+    startTime = Date.now();
+    // Set an interval to update the time remaining every second
+    intervalId = setInterval(updateTime, 1000);
 }
 
-// Function to generate a new set of words
-function generateNewWords() {
-  // Reset the words array
-  words = ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog", "about", "all" , "also", "and", "as", "at", "be", "because", "but", "by", "can", "come", "could", "day", "do", "even", "find", "first", "for", "from","get" ,"give" ,"go" ,"have" ,"he" ,"her","here" ,"him" ,"his" ,"how" ,"I" ,"if" ,"in" ,"into" ,"it" ,"its" ,"just","know" ,"like","look" ,"make" ,"man" ,"many" ,"me" ,"more" ,"my"  ,"new" ,"no" ,"not" ,"now" ,"of" ,"on","one","only" ,"or" ,"other"  ,"our" ,"out" ,"people" ,"say" ,"see" ,"she" ,"so" ,"some" ,"take","tell","than","that","the" ,"their" ,"them" ,"then","there","these","they","thing" ,"think" ,"this" ,"those" ,"time" ,"to" ,"two" ,"up" ,"use" ,"very" ,"want" ,"way" ,"we","well","what","when"  ,"which" ,"who" ,"will" ,"with","would","year","you","your"];
-
-  // Shuffle the words array
-  shuffle(words);
-}
-
-// Add a keydown event listener to the typing area
-typingArea.addEventListener("keydown", function(e) {
-  // Check if the user pressed the TAB key
-  if (e.keyCode === 9) {
-    // Stop the test
-    stopTest();
-  }
-});
-
-// Add an input event listener to the typing area
-typingArea.addEventListener("input", function() {
-  // Check if the user has typed the correct sentence
-  checkSentence();
-});
-
-// Function to check if the user has typed the correct sentence
-function checkSentence() {
-  // Get the typed text
-  let typedText = typingArea.value;
-
-  // Get the test sentence text
-  let testText = testSentence.textContent;
-
-  // Check if the typed text matches the test sentence text
-  if (typedText === testText) {
-    // Check if the user has typed the first line
-    if (currentLine === 1) {
-      // Generate a new set of words
-      generateNewWords();
-
-      // Create a new test sentence element
-      testSentence = createTestSentence();
-
-      // Append the test sentence element to the test area
-      testArea.appendChild(testSentence);
+// Function to update the time remaining
+function updateTime() {
+    // Calculate the time remaining
+    const elapsedTime = Date.now() - startTime;
+    const remainingTime = totalTime - (elapsedTime / 1000);
+    // Update the time element
+    time.innerText = remainingTime.toFixed(2);
+    // If the time is up
+    if (remainingTime <= 0) {
+        // Stop the interval
+        clearInterval(intervalId);
+        // Calculate and display the WPM and CPM
+        wpm.innerText = ((charactersTyped / 5) / (totalTime / 60)).toFixed(2);
+        cpm.innerText = (charactersTyped / (totalTime / 60)).toFixed(2);
+        // Disable the typing area
+        typingArea.disabled = true;
     }
-  }
 }
 
-// Function to stop the test
-function stopTest() {
-  // Remove the input event listener
-  typingArea.removeEventListener("input", function() {});
+// Event listener for the typing area
+typingArea.addEventListener("input", function() {
+    // Get the text typed by the user
+    const text = typingArea.value;
+    // Get the text to type
+    const textToTypeText = textToType.innerText;
+    // Compare the text typed by the user with the text to type
+    for (let i = 0; i < text.length; i++) {
+        // If the character is incorrect
+        if (text[i] !== textToTypeText[i]) {
+            // Increment the mistakes count
+            mistakesCount++;
+            mistakes.innerText = mistakesCount;
+        }
+    }
+    // Update the characters typed count
+    charactersTyped = text.length;
+});
 
-  // Hide the test area
-  testArea.style.display = "none";
+// Event listener for the try again button
+tryAgainBtn.addEventListener("click", startGame);
 
-  // Reset the current line
-  currentLine = 1;
-}
-
-// Function to reset the test
-function resetTest() {
-  // Generate a new set of words
-  generateNewWords();
-
-  // Create a new test sentence element
-  testSentence = createTestSentence();
-
-  // Clear the typing area
-  typingArea.value = "";
-
-  // Show the test area
-  testArea.style.display = "block";
-
-  // Append the test sentence element to the test area
-  testArea.appendChild(testSentence);
-
-  // Add an input event listener to the typing area
-  typingArea.addEventListener("input", function() {
-    // Check if the user has typed the correct sentence
-    checkSentence();
-  });
-}
+// Start the game when the page loads
+startGame();
 
 
 
