@@ -17,8 +17,28 @@ let charactersTyped = 0;
 function generateNewParagraph() {
     // replace this with your own array of paragraphs or some api call to fetch paragraphs
     const paragraphs = [
-        "The quick brown fox jumps over the lazy dog.", 
-        "Once upon a time, in a land far far away."
+        "the sky is blue and the grass is green the cat jumped over the moon and landed on a cloud the dog barked at the mailman and chased after a squirrel the boy rode his bike down the street and waved to his friends", 
+        "You found an EASTER EGG... if you type it out it does not do anything at the moment",
+        "the dog chased the cat down the street but the cat was too fast for the dog so the dog gave up and went home to eat its dinner while the cat sat on a fence and watched the sunset.",
+        "the dog ran through the field chasing the cat with a ball in its mouth",
+        "the apple fell from the tree and landed on the ground with a thud",
+        "the car drove down the street with the music blasting from the speakers",
+        "the girl walked down the sidewalk with her headphones on and singing",
+        "the boy played video games all night and never went to bed",
+        "the man stood on the corner with a sign that said will work for food'",
+        "the woman sat on the bench with a book in her hand and a smile on her face",
+        "the baby cried in the crib and wouldn't stop until the mother picked it up",
+        "the dog barked at the mailman and chased him down the street",
+        "the cat sat on the windowsill and watched the birds fly by",
+        "the boy rode his bike to the park and played on the playground",
+        "the girl picked flowers in the garden and put them in her hair",
+        "the man worked on his car in the garage and listened to the radio",
+        "the woman cooked dinner in the kitchen and sang to herself",
+        "the baby crawled on the floor and grabbed at the toys",
+        "the dog ran through the rain and shook water all over the floor",
+        "the cat slept on the couch and purred while the dog barked",
+        "the boy played with his toys and made noise until the parents yelled",
+        "the girl read a story and fell asleep with the book on her chest"
     ];
     // Select a random paragraph from the array
     const paragraph = paragraphs[Math.floor(Math.random() * paragraphs.length)];
