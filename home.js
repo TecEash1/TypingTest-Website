@@ -42,7 +42,12 @@ function generateNewParagraph() {
     ];
     // Select a random paragraph from the array
     const paragraph = paragraphs[Math.floor(Math.random() * paragraphs.length)];
-    textToType.innerText = paragraph;
+    textToType.innerHTML = "";
+    for (let i = 0; i < paragraph.length; i++) {
+        const characterSpan = document.createElement("span");
+        characterSpan.innerText = paragraph[i];
+        textToType.appendChild(characterSpan);
+    }
 }
 
 // Function to start the game
@@ -60,6 +65,11 @@ function startGame() {
     mistakes.innerText = mistakesCount;
     // Reset the characters typed count
     charactersTyped = 0;
+    // Reset the color of the characters
+    const characters = textToType.getElementsByTagName("span");
+    for (let i = 0; i < characters.length; i++) {
+        characters[i].style.color = "black";
+    }
     // Get the current time
     startTime = Date.now();
     // Set an interval to update the time remaining every second
@@ -79,36 +89,44 @@ function updateTime() {
         clearInterval(intervalId);
         // Calculate and display the WPM and CPM
         wpm.innerText = ((charactersTyped / 5) / (totalTime / 60)).toFixed(2);
-        cpm.innerText = (charactersTyped / (totalTime / 60)).toFixed(2);
-        // Disable the typing area
-        typingArea.disabled = true;
-    }
-}
-
-// Event listener for the typing area
-typingArea.addEventListener("input", function() {
-    // Get the text typed by the user
-    const text = typingArea.value;
-    // Get the text to type
-    const textToTypeText = textToType.innerText;
-    // Compare the text typed by the user with the text to type
-    for (let i = 0; i < text.length; i++) {
-        // If the character is incorrect
-        if (text[i] !== textToTypeText[i]) {
-            // Increment the mistakes count
-            mistakesCount++;
-            mistakes.innerText = mistakesCount;
+        cpm.innerText = (charactersTyped / (totalTime).toFixed(2));
         }
     }
-    // Update the characters typed count
-    charactersTyped = text.length;
-});
-
-// Event listener for the try again button
-tryAgainBtn.addEventListener("click", startGame);
-
-// Start the game when the page loads
-startGame();
+    
+    // Function to handle changes in the typing area
+    function handleTypingAreaChange(event) {
+        // Get the current value of the typing area
+        const value = event.target.value;
+        // Get the characters in the text to type
+        const characters = textToType.getElementsByTagName("span");
+        // Loop through the characters
+        for (let i = 0; i < characters.length; i++) {
+            // If the character has been typed correctly
+            if (value[i] === characters[i].innerText) {
+                // Color the character green
+                characters[i].style.color = "green";
+                // Increment the characters typed count
+                charactersTyped++;
+            } else {
+                // Color the character red
+                characters[i].style.color = "red";
+                // Increment the mistakes count
+                mistakesCount++;
+                // Update the mistakes element
+                mistakes.innerText = mistakesCount;
+            }
+        }
+    }
+    
+    // Start the game when the page loads
+    startGame();
+    
+    // Add an event listener to the typing area
+    typingArea.addEventListener("input", handleTypingAreaChange);
+    
+    // Add an event listener to the try again button
+    tryAgainBtn.addEventListener("click", startGame);
+    
 
 
 
