@@ -106,12 +106,12 @@ function updateTime() {
                 // Color the character green
                 characters[i].style.color = "green";
                 // Increment the characters typed count
-                charactersTyped++;
+                //charactersTyped++; - (edited - test)
             } else {
                 // Color the character red
                 characters[i].style.color = "red";
                 // Increment the mistakes count
-                mistakesCount++;
+                //mistakesCount++; - - (edited - test)
                 // Update the mistakes element
                 mistakes.innerText = mistakesCount;
             }
