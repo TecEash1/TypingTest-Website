@@ -89,7 +89,7 @@ function updateTime() {
         clearInterval(intervalId);
         // Calculate and display the WPM and CPM
         wpm.innerText = ((charactersTyped / 5) / (totalTime / 60)).toFixed(2);
-        cpm.innerText = (charactersTyped / (totalTime).toFixed(2));
+        cpm.innerText = (charactersTyped / (totalTime / 60)).toFixed(2);
         }
     }
     
@@ -106,12 +106,12 @@ function updateTime() {
                 // Color the character green
                 characters[i].style.color = "green";
                 // Increment the characters typed count
-                //charactersTyped++; - (edited - test)
+                charactersTyped++;
             } else {
                 // Color the character red
                 characters[i].style.color = "red";
                 // Increment the mistakes count
-                //mistakesCount++; - - (edited - test)
+                mistakesCount++;
                 // Update the mistakes element
                 mistakes.innerText = mistakesCount;
             }
