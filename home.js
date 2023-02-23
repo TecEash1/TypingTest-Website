@@ -89,7 +89,7 @@ function updateTime() {
         clearInterval(intervalId);
         // Calculate and display the WPM and CPM
         wpm.innerText = ((charactersTyped / 5) / (totalTime / 60)).toFixed(2);
-        cpm.innerText = (charactersTyped / (totalTime / 60)).toFixed(2);
+        cpm.innerText = (charactersTyped / totalTime).toFixed(2);
         }
     }
     
