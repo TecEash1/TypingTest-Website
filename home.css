@@ -1,19 +1,24 @@
-#container {
+body {
+    background-image: url("./background.jpg");
+    background-size: cover;
+  }
+  
+  #container {
     width: 80%;
     margin: 0 auto;
-}
-
-#prompt {
+  }
+  
+  #prompt {
     font-size: 24px;
     margin-bottom: 20px;
-}
-
-#text-to-type {
+  }
+  
+  #text-to-type {
     font-size: 36px;
     margin-bottom: 20px;
-}
-
-#typing-area {
+  }
+  
+  #typing-area {
     width: 100%;
     height: 200px;
     padding: 10px;
@@ -22,32 +27,36 @@
     border: 2px solid #ccc;
     border-radius: 5px;
     resize: none;
-}
-
-#results {
+  }
+  
+  #results {
     margin-bottom: 20px;
-}
-
-#results div {
+  }
+  
+  #results div {
     margin-bottom: 10px;
-}
-
-#time, #mistakes, #wpm, #cpm {
+  }
+  
+  #time,
+  #mistakes,
+  #wpm,
+  #cpm {
     font-weight: bold;
-}
-
-#try-again-btn {
+  }
+  
+  #try-again-btn {
     padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-#try-again-btn:hover {
+  }
+  
+  #try-again-btn:hover {
     background-color: #3e8e41;
-}
+  }
+  
 
 
   
