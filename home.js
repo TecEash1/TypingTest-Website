@@ -69,6 +69,8 @@ function startGame() {
     const characters = textToType.getElementsByTagName("span");
     for (let i = 0; i < characters.length; i++) {
         characters[i].style.color = "black";
+        console.log("black??")
+
     }
     // Get the current time
     startTime = Date.now();
@@ -89,22 +91,31 @@ function updateTime() {
         clearInterval(intervalId);
         // Calculate and display the WPM and CPM
         wpm.innerText = ((charactersTyped / 5) / (totalTime / 60)).toFixed(2);
-        cpm.innerText = (charactersTyped / (totalTime).toFixed(2));
+        cpm.innerText = (charactersTyped / (totalTime / 60)).toFixed(2);        
         }
     }
     
+    // Function to handle changes in the typing area
+    let lastCorrectIndex = -1;
+
     // Function to handle changes in the typing area
     function handleTypingAreaChange(event) {
         // Get the current value of the typing area
         const value = event.target.value;
         // Get the characters in the text to type
         const characters = textToType.getElementsByTagName("span");
-        // Loop through the characters
-        for (let i = 0; i < characters.length; i++) {
+        // Loop through the characters starting from the lastCorrectIndex + 1
+        for (let i = lastCorrectIndex + 1; i < characters.length; i++) {
+            // If the current index is greater than the length of the value string, exit the loop
+            if (i >= value.length) {
+                break;
+            }
             // If the character has been typed correctly
             if (value[i] === characters[i].innerText) {
                 // Color the character green
                 characters[i].style.color = "green";
+                // Update the lastCorrectIndex
+                lastCorrectIndex = i;
                 // Increment the characters typed count
                 charactersTyped++;
             } else {
@@ -126,7 +137,6 @@ function updateTime() {
     
     // Add an event listener to the try again button
     tryAgainBtn.addEventListener("click", startGame);
-    
 
 
 
